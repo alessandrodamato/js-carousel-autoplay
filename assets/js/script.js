@@ -1,3 +1,27 @@
+
+/////////////// TIMING FUNCTION ///////////////
+const autoPlay = setInterval(() => { 
+  
+  if (counter === (images.length - 1)) {
+    imgCollection[counter].classList.add('hide');
+    coverCollection[counter].classList.add('dark')
+    imgThumbnail[counter].classList.remove('border')
+    counter = 0;
+    imgCollection[counter].classList.remove('hide');
+    coverCollection[counter].classList.remove('dark')
+    imgThumbnail[counter].classList.add('border')
+  } else {
+    imgCollection[counter].classList.add('hide');
+    coverCollection[counter].classList.add('dark')
+    imgThumbnail[counter].classList.remove('border')
+    counter++;
+    imgCollection[counter].classList.remove('hide');
+    coverCollection[counter].classList.remove('dark')
+    imgThumbnail[counter].classList.add('border')
+  }
+  
+}, 3000);
+
 const images = [
   'assets/img/01.webp',
   'assets/img/02.webp',
@@ -9,6 +33,35 @@ const images = [
 let counter = 0;
 
 const slider = document.querySelector('.slider');
+/////////////// ARROW FUNCTIONS ///////////////
+
+slider.addEventListener("mouseenter", () => {
+  clearInterval(autoPlay);
+  console.log('STOP');
+});
+
+slider.addEventListener("mouseleave", () => {
+  setInterval(() => {
+    if (counter === (images.length - 1)) {
+      imgCollection[counter].classList.add('hide');
+      coverCollection[counter].classList.add('dark')
+      imgThumbnail[counter].classList.remove('border')
+      counter = 0;
+      imgCollection[counter].classList.remove('hide');
+      coverCollection[counter].classList.remove('dark')
+      imgThumbnail[counter].classList.add('border')
+    } else {
+      imgCollection[counter].classList.add('hide');
+      coverCollection[counter].classList.add('dark')
+      imgThumbnail[counter].classList.remove('border')
+      counter++;
+      imgCollection[counter].classList.remove('hide');
+      coverCollection[counter].classList.remove('dark')
+      imgThumbnail[counter].classList.add('border')
+    }
+  }, 3000);
+  console.log('PLAY');
+});
 
 for (let i = 0; i < images.length; i++) {
   const img = images[i];
