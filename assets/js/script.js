@@ -1,27 +1,3 @@
-
-/////////////// TIMING FUNCTION ///////////////
-const autoPlay = setInterval(() => { 
-  
-  if (counter === (images.length - 1)) {
-    imgCollection[counter].classList.add('hide');
-    coverCollection[counter].classList.add('dark')
-    imgThumbnail[counter].classList.remove('border')
-    counter = 0;
-    imgCollection[counter].classList.remove('hide');
-    coverCollection[counter].classList.remove('dark')
-    imgThumbnail[counter].classList.add('border')
-  } else {
-    imgCollection[counter].classList.add('hide');
-    coverCollection[counter].classList.add('dark')
-    imgThumbnail[counter].classList.remove('border')
-    counter++;
-    imgCollection[counter].classList.remove('hide');
-    coverCollection[counter].classList.remove('dark')
-    imgThumbnail[counter].classList.add('border')
-  }
-  
-}, 3000);
-
 const images = [
   'assets/img/01.webp',
   'assets/img/02.webp',
@@ -35,33 +11,18 @@ let counter = 0;
 const slider = document.querySelector('.slider');
 /////////////// ARROW FUNCTIONS ///////////////
 
-slider.addEventListener("mouseenter", () => {
+slider.addEventListener("mouseenter", function(){
   clearInterval(autoPlay);
   console.log('STOP');
 });
 
 slider.addEventListener("mouseleave", () => {
-  setInterval(() => {
-    if (counter === (images.length - 1)) {
-      imgCollection[counter].classList.add('hide');
-      coverCollection[counter].classList.add('dark')
-      imgThumbnail[counter].classList.remove('border')
-      counter = 0;
-      imgCollection[counter].classList.remove('hide');
-      coverCollection[counter].classList.remove('dark')
-      imgThumbnail[counter].classList.add('border')
-    } else {
-      imgCollection[counter].classList.add('hide');
-      coverCollection[counter].classList.add('dark')
-      imgThumbnail[counter].classList.remove('border')
-      counter++;
-      imgCollection[counter].classList.remove('hide');
-      coverCollection[counter].classList.remove('dark')
-      imgThumbnail[counter].classList.add('border')
-    }
-  }, 3000);
+  autoPlay = setInterval(() => switchDown(), 3000); 
   console.log('PLAY');
 });
+
+/////////////// TIMING FUNCTION ///////////////
+let autoPlay = setInterval(() => switchDown(), 3000);
 
 for (let i = 0; i < images.length; i++) {
   const img = images[i];
@@ -87,7 +48,19 @@ imgThumbnail[counter].classList.add('border')
 const topButton = document.querySelector('.btn-top');
 
 topButton.addEventListener('click', function(){
+  switchUp();
+})
 
+// bottone DOWN
+const bottomButton = document.querySelector('.btn-bottom');
+
+bottomButton.addEventListener('click', function(){
+  switchDown()
+})
+
+/////////// FUNCTIONS ///////////
+
+function switchUp () {
   if (counter === 0) {
     imgCollection[counter].classList.add('hide');
     coverCollection[counter].classList.add('dark')
@@ -105,14 +78,9 @@ topButton.addEventListener('click', function(){
     coverCollection[counter].classList.remove('dark')
     imgThumbnail[counter].classList.add('border')
   }
+}
 
-})
-
-// bottone DOWN
-const bottomButton = document.querySelector('.btn-bottom');
-
-bottomButton.addEventListener('click', function(){
-  
+function switchDown () {
   if (counter === (images.length - 1)) {
     imgCollection[counter].classList.add('hide');
     coverCollection[counter].classList.add('dark')
@@ -130,5 +98,4 @@ bottomButton.addEventListener('click', function(){
     coverCollection[counter].classList.remove('dark')
     imgThumbnail[counter].classList.add('border')
   }
-
-})
+}
